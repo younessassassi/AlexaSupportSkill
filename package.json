@@ -1,0 +1,22 @@
+{
+  "name": "attsupport",
+  "version": "0.0.1",
+  "description": "Echo skills to help customers when they walk in to att stores",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "authors": ["Youness Assassi", "Elissa Backas", "Manjula Arjula", "Nelson Cuebas", "Threefoot Jane", "Rios Roque"],
+  "license": "AT&T",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.0",
+    "gulp": "^3.9.1",
+    "mongoose": "^4.11.13"
+  },
+  "devDependencies": {
+    "gulp-nodemon": "^2.2.1",
+    "jshint": "^2.9.5"
+  }
+}
