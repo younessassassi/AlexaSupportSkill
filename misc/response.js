@@ -1,5 +1,6 @@
-{
-    "_id" : ObjectId("59d1a482ba7594e7d4de910e"),
+
+var response = {
+    // "_id" : ObjectId("59d1a482ba7594e7d4de910e"),
     "version" : "1.0",
     "sessionAttributes" : {},
     "response" : {
@@ -14,4 +15,6 @@
         },
         "shouldEndSession" : true
     }
-}
+};
+
+module.exports = response;
