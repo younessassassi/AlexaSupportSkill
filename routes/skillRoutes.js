@@ -11,9 +11,9 @@ var routes = function (Skill) {
                 if (err) {
                     res.status(500).send(err);
                 } else {
-                    // res.json(skills);
+                    res.json(skills);
                     console.log('response stub', responsestub);
-                    res.json(responsestub);
+                    // res.json(responsestub);
                 }
             });
         });

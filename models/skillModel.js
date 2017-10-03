@@ -11,22 +11,22 @@ var subCard = {
     type: {type: String},
     title: {type: String},
     content: {type: String}
-}
+};
 
 var subResponse = {
-    outputSpeech: {subSpeech},
-    card: {subCard},
+    outputSpeech: subSpeech,
+    card: subCard,
     shouldEndSession: {type: Boolean, default: true}
 };
 
 var subAttributes = {
     name: {type: String}
-}
+};
 
 var skillResponseSchema = new Schema({
     version: {type: String},
-    sessionAttributes: {subAttributes},
-    response: {subResponse}
+    sessionAttributes: subAttributes,
+    response: subResponse
 });
 
 module.exports = mongoose.model('Skill', skillResponseSchema);
