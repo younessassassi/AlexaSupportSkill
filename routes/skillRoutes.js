@@ -1,4 +1,5 @@
-var express = require('express');
+var express = require('express'),
+    skillsJson = require('../data/skillJson.js');;
 var responsestub = require('../misc/response');
 
 var routes = function (Skill) {
@@ -11,14 +12,23 @@ var routes = function (Skill) {
                 if (err) {
                     res.status(500).send(err);
                 } else {
-                    // res.json(skills);
+                    res.json(skills);
                     console.log('response stub', responsestub);
-                    res.json(responsestub);
+                    // res.json(responsestub);
                 }
             });
         });
         
-
+    skillRouter.route('/admin')
+        .get(function(req, res) {
+            Skill.insertMany(skillsJson, function(err, data) {
+                if (err) {
+                    res.status(500).send(err);
+                } else {
+                    res.json(data);
+                }
+            });
+        });
 
     return skillRouter;
 };
