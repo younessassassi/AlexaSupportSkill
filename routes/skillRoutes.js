@@ -5,18 +5,24 @@ var responsestub = require('../misc/response');
 var routes = function (Skill) {
     var skillRouter = express.Router();
 
+    skillRouter.use('/', function(req, res, next) {
+        Skill.findOne({}, function(err, skill) {
+            if (err) {
+                res.status(500).send(err);
+            } else if(skill) {
+                req.skill = skill;
+                next();
+            } else {
+                res.status(404).send('no skill found');
+            }
+        });
+    });
     skillRouter.route('/')
+        .post(function(req, res) {
+            res.status(201).json(req.skill); 
+        })
         .get(function (req, res) {
-            var query = {};
-            Skill.find(query, function (err, skills) {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    res.json(skills);
-                    console.log('response stub', responsestub);
-                    // res.json(responsestub);
-                }
-            });
+            res.json(req.skill);
         });
         
     skillRouter.route('/admin')
