@@ -1,10 +1,27 @@
 var express = require('express'),
-    skillsJson = require('../data/skillJson.js');;
-var responsestub = require('../misc/response');
+    alexaVerifier = require('alexa-verifier')
+    skillsJson = require('../data/skillJson.js'),
+    responsestub = require('../misc/response');
 
 var routes = function (Skill) {
+    function requestVerifier(req, res, next) {
+        alexaVerifier(
+            req.headers.signaturecertchainurl,
+            req.headers.signature,
+            req.rawBody,
+            function verificationCallback(err) {
+                if (err) {
+                    console.log('error', err);
+                    res.status(401).json({ message: 'Verification Failure', error: err });
+                } else {
+                    next();
+                }
+            }
+        );
+    }
     var skillRouter = express.Router();
-
+    // skillRouter.use('/', requestVerifier, function(req, res, next) {
+        
     skillRouter.use('/', function(req, res, next) {
         Skill.findOne({}, function(err, skill) {
             if (err) {
@@ -19,10 +36,13 @@ var routes = function (Skill) {
     });
     skillRouter.route('/')
         .post(function(req, res) {
-            res.status(201).json(req.skill); 
+            console.log('success');
+            res.json(responsestub);
+            // res.status(201).json(req.skill); 
         })
         .get(function (req, res) {
-            res.json(req.skill);
+            res.json(responsestub);
+            // res.json(req.skill);
         });
         
     skillRouter.route('/admin')
