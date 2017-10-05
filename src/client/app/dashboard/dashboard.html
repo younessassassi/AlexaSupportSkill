@@ -1,8 +1,21 @@
 <md-content>
     <md-content class="dashboard-content">
-        <md-list ng-repeat="person in vm.people">
-            <md-list-item>
-                {{person.firstName}}
+        <md-list>
+            <span layout="row" flex>
+                <span flex="10"></span>
+                <span flex="30" class="name-title">Name</span>
+                <span flex="30" class="name-title">Approx Wait Time</span>
+                <span flex="30"></span>
+            </span>
+            <md-divider></md-divider>
+            <md-list-item ng-repeat="person in vm.customers" class="secondary-button-padding" ng-click="vm.selectCustomer($event, person)">
+                    <span flex="10">{{person.order}}</span>
+                    <span flex="30">{{person.name}}</span>
+                    <span flex="30"><center>{{person.waitTime}}</center></span>
+                    <span flex="30" layout-align="right"></span>    
+                    <md-icon md-svg-icon="check" class="md-secondary" ng-click="vm.clearCustomer($event, person)"></md-icon>
+                    <md-icon md-svg-icon="desk-phone"  ng-click="vm.contactCustomer($event, person)" aria-label="Call or text" class="md-secondary"></md-icon>
+                <md-divider></md-divider>
             </md-list-item>    
         </md-list>
     </md-content>

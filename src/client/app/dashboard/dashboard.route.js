@@ -21,7 +21,7 @@
                 title: 'Store Queue',
                 settings: {
                     nav: 1,
-                    content: 'Dashboard',
+                    content: 'Store Queue',
                     svg: 'tachometer'
                 }
             }
