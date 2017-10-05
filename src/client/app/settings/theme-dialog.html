@@ -1,0 +1,25 @@
+<md-dialog aria-label="Theme Pick List"  ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Themes</h2>
+        <span flex></span>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+         <md-list ng-cloak>
+            <md-subheader class="md-no-sticky">
+                Please select a theme to apply to your application
+            </md-subheader>
+            <md-list-item ng-repeat="item in vm.themes" class="secondary-button-padding"
+                ng-click="vm.setTheme(item.name)">
+                <p>{{item.value}}</p>
+            </md-list-item>
+            <md-divider></md-divider>
+        </md-list>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+
+    </md-dialog-actions>
+</md-dialog>
+

@@ -1,0 +1,1481 @@
+@attQuestionColor: #f4f4f4;
+@bottomToolBarHeight: 55px;
+@completeColor: #188764;
+@cardHeaderColor: rgba(239, 239, 239, 1);
+@cardContentBackground: #f0f0f0;
+@containerBorderColor: rgba(0,0,0,0.12);
+@disabledColor: black;
+@errorMessageColor: rgba(213, 0, 0, 1);
+@floatButtonContent: white;
+@formLabelColor: #5C5C70;
+@helpButtonBackground: rgb(224,224,224);
+@listItemBorderColor: #ccc;
+@listSubheaderBackgroundColor: lightsteelblue;
+@placeHolderColor: #ddd;
+@sectionDividerColor: #ddd;
+@splashMessageShaddowColor: rgba(0, 0, 0, 0.15);
+@targetHighLightedColor: #03a9f4;
+@targetHoverColor: rgba(158,158,158,0.2);
+@targetNameTitleColor: rgba(0,0,0,1);
+@targetDetailTitleColor: rgba(0,0,0,0.54);
+@targetDetailValueColor: rgba(0,0,0,0.75);
+@reviewGreenValueColor: rgba(240,255,240,1);
+@reviewRedValueColor: rgba(255,240,240,1);
+@reviewOrangeValueColor: rgba(255,255,230,1);
+@reviewScoreBGColor: #ffc;
+@svgLockOrangeColor: rgba(255,165,0,1);
+@hoveredStarColor: red;
+@unselectedStarColor: #a9a9a9;
+@selectedStarColor: #EA7400;
+@listTitleColor: #5C5C70;
+@listBGColor: #eee;
+@warning: red;
+
+
+@font-face {
+    font-family: 'Omnes_ATT W02';
+    src: url('../fonts/Omnes_ATTW02.eot');
+    src: url('../fonts/Omnes_ATTW02.eot?#iefix') format('embedded-opentype'),url('../fonts/Omnes_ATTW02.woff') format('woff'),url('../fonts/Omnes_ATTW02.ttf') format('truetype'),url('../fonts/Omnes_ATTW02.svg#Omnes_ATT W02') format('svg');
+    font-style: normal;
+    font-weight: 400;
+}
+
+* {
+    font-family: "Omnes_ATT W02", Arial, Helvetica, sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+#app-logo {
+    max-width: 40px; 
+    margin-right: 5px;
+}
+
+#admin-proprietary-statement {
+    font-size: 11px;
+    text-align: justify;
+    margin: 25px 5px 10px 5px;
+    color:black;
+}
+
+.warning {
+    color: @warning !important;
+}
+
+/*** Toasts ***/
+.toast-message {
+    opacity: 1 !important;
+}
+
+/*** End of toasts ***/
+
+/*** font colors ***/
+md-input-container .md-input[disabled],
+md-select[disabled] .md-select-value,
+md-datepicker[disabled] .md-datepicker-input,
+md-input-container textarea[disabled],
+md-switch[disabled] .md-label {
+    color: @disabledColor;
+}
+
+//.md-datepicker-input
+
+/*** End of font colors ***/
+
+
+/*#region Angular ng-include, ng-view, ng-repeat shuffle animations*/
+
+// .shuffle-animation.ng-enter,
+// .shuffle-animation.ng-leave {
+//     position: relative;
+// }
+
+// .shuffle-animation.ng-enter {
+//     transition: ease-out all 300ms 400ms;
+//     left: 2em;
+//     opacity: 0;
+// }
+
+// .shuffle-animation.ng-enter.ng-enter-active {
+//     left: 0;
+//     opacity: 1;
+// }
+
+// .shuffle-animation.ng-leave {
+//     left: 0;
+//     opacity: 1;
+// }
+
+// .shuffle-animation.ng-leave.ng-leave-active {
+//     left: 2em;
+//     opacity: 0;
+// }
+
+/*** Targets ***/
+md-list md-list-item.selected,
+md-virtual-repeat-container .target-list-item.selected {
+    background-color: @targetHighLightedColor;
+}
+
+md-virtual-repeat-container .target-list-item:hover {
+    background-color: @targetHoverColor;
+}
+
+.autocomplete-custom-template li {
+    border-bottom: 1px solid @listItemBorderColor;
+    height: auto;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    white-space: normal;
+}
+.autocomplete-custom-template li:last-child {
+    border-bottom-width: 0;
+}
+.autocomplete-custom-template .item-title,
+.autocomplete-custom-template .item-metadata {
+    display: block;
+    line-height: 2;
+}
+.autocomplete-custom-template .item-title md-icon {
+    height: 18px;
+    width: 18px;
+}
+
+/*** End of Targets ***/
+
+*:focus {
+    outline: none;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.widget-container {
+    margin: 5px;
+}
+
+.vertical-space {
+    height: 20px;
+}
+
+/*** floating button ***/
+.show-search-bar {
+    top: 55px;
+}
+
+.hide-search-bar {
+    top: 0;
+}
+
+.user-scrollable-content {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    overflow: auto;
+}
+
+.scrollable-content {
+    position: absolute;
+    top: 136px;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    overflow: auto;
+}
+
+
+.float-button {
+    position: absolute;
+    bottom: 5%; /* Adjust height */
+    right: 5%; /* Adjust position */
+    z-index: 50;
+}
+
+.float-button .height_fix {
+    margin-top: 100%;
+    border: 1px solid red;
+}
+
+.float-button .content {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin-top: -20px;
+    color: @floatButtonContent;
+}
+/*** end of floating button ***/
+
+.att-blue-button {
+    background-color: #1976d2;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.att-blue-button:hover {
+    box-shadow: 2px 2px 5px gray;
+    color: @cardHeaderColor;
+}
+
+.att-list-title {
+    text-align: right;
+    color: @listTitleColor;
+    font-weight: bold !important;
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+.att-list-value {
+    color: @targetDetailValueColor;
+    font-weight: 500;
+    font-size: 14px;
+    margin-right: 4px;
+    margin-left: 4px;
+}
+
+.att-list-header {
+    background-color: @cardHeaderColor;
+}
+/*** formly ***/
+
+/** star rating **/
+.rating {
+    color: @unselectedStarColor;
+    margin: 0;
+    padding: 0;
+}
+ul.rating {
+    display: inline-block;
+}
+.rating li {
+    list-style-type: none;
+    display: inline-block;
+    padding: 1px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 3em;
+    cursor: pointer;
+}
+.rating .filled {
+    color:@selectedStarColor;
+}
+.rating .hovered {
+    color:@hoveredStarColor;
+}
+/** end of star rating **/
+
+
+// fix for angular formly material
+.icon-button {
+    min-width: 50px;
+}
+
+.right-icon {
+    position: absolute;
+    top: 4px !important;
+    right: 2px !important;
+    left: auto !important;
+    margin-top: 0;
+}
+
+.no-left-icon {
+    padding-left: 0 !important;
+}
+
+.no-right-padding {
+    padding-right: 0 !important;
+}
+
+.date-time-picker {
+    max-width: 200px;
+}
+
+.time-picker {
+    margin-top: 12px;
+}
+
+md-input-container {
+    display: block;
+    margin: 0px !important;
+}
+
+md-input-container.no-left-icon > label {
+    left: auto;
+}
+
+md-select-menu  {
+    height: 100%;
+    max-height: 100%;
+}
+
+md-select-menu md-content {
+    max-height: 300px;
+}
+
+.stationary-label {
+    white-space: normal !important;
+    width: 100% !important;
+    position: relative !important;
+    transform: none !important;
+    font-size: 1.1em; 
+    font-weight: bold;
+}
+
+.formly-field {
+    /* give some space between your fields */
+    padding-bottom: 0;
+    label {
+        white-space: normal !important;
+        width: 100% !important;
+        position: relative !important;
+        transform: none !important;
+    }
+
+    .question-label {
+        font-size: 1.1em; 
+        font-weight: bold;
+    }
+    
+    md-list {
+        padding-top: 15px;
+    }
+    md-list-item {
+        padding-top: 2px;
+    }
+    input, textarea, .md-select-value {
+        font-size: 1.2em !important;
+    }
+}
+
+.md-select-value {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.md-select-placeholder {
+    color: @formLabelColor !important;
+}
+
+textarea.md-input {
+    max-height: 248px;
+    overflow: auto;
+}
+
+md-slider .md-track-ticks canvas {
+    height: 0;
+}
+
+.repeatsection-option {
+    height: 50px;
+}
+
+.formly.row,
+.formly.row .formly-field {
+    margin-bottom: 0;
+}
+
+.formly.row .formly-field:first-child {
+    padding-left: 0;
+}
+
+.formly.row .formly-field:nth-last-child(2) {
+    padding-right: 0;
+}
+
+.formly-field-group ng-form {
+    margin: 0;
+}
+
+.formly-field-group {
+    margin: 0;
+}
+
+.formly.row {
+    display: block;
+}
+
+.formly-field.section-label {
+    margin-bottom: 8px;
+}
+
+.date-time-picker [ng-message-exp]{
+    font-size: .8em;
+    position: absolute;
+    width: 100%;
+    color: @errorMessageColor;
+    margin-top: 2px;
+}
+
+md-datepicker {
+    margin: 0;
+    padding: 0;
+}
+
+.md-datepicker-input-container {
+    width: 110px;
+    margin-left: 5px;
+    padding-bottom: 3px;
+}
+
+.md-datepicker-input {
+    pointer-events: none;
+    min-width: 80px;
+}
+
+.md-datepicker-button {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/*** End of formly ***/
+
+
+/*** form admin  ***/
+
+#survey-dialog {
+    padding: 8px;
+    margin: 8px;
+}
+
+.controls {
+    margin-bottom: 20px;
+}
+
+.page-header {
+    margin-top: 20px;
+}
+
+ul {
+    list-style: none;
+}
+
+// fix for iOS devices
+.dropdown-backdrop {
+    position: static;
+}
+
+/*** end of form admin ***/
+
+
+/*** Angular Material ***/
+
+/** md-list **/
+
+.carrot {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.status-filter {
+    font-size: .8em;
+    margin-top: 9px !important;
+}
+
+.att-settings md-divider {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.att-settings md-list-item > p,
+.att-settings md-list-item > .md-list-item-inner > p,
+.att-settings md-list-item .md-list-item-inner > p,
+.att-settings md-list-item .md-list-item-inner > .md-list-item-inner > p {
+    user-select: none;
+    /* Likely future */
+    white-space: nowrap;
+}
+
+.att-settings .secondary-button-padding p {
+    padding-right: 100px;
+}
+
+#about {
+    text-align: center;
+}
+
+#settings-list {
+    margin-bottom: 0;
+    padding-bottom: 0
+}
+
+.anchor-item {
+    margin-left: -8px;
+    margin-right: -8px;
+}
+
+
+/** end of md-list **/
+/** md-card */
+
+.form-header {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.object-status {
+    font-size: 0.8em;
+}
+
+.header-button {
+    margin: 0;
+    padding: 0;
+    min-width: 50px;
+    line-height: 32px;
+}
+
+md-card-header {
+    background-color: @cardHeaderColor;
+    min-height: 55px;
+}
+
+.att-title-spacing {
+    padding-bottom: 10px;
+} 
+
+md-card-content .survey-option {
+    float: left;
+    min-width: 20%;
+    min-height: 100px;
+    box-sizing: border-box;
+    padding: 0 8px;
+}
+
+md-card-content .survey-option .md-item-text {
+    padding: 8px;
+    background: @cardContentBackground;
+    border-radius: 3px;
+}
+
+md-card-content .survey-option .md-item-text h3,
+md-card-content .survey-option .md-item-text p {
+    padding: 0;
+    margin: 0;
+}
+/** end of md-card **/
+
+/*** md-dialog ***/
+// fix for ie11 causing the full screen dialog not to be centered on screen
+.md-dialog-fullscreen {
+    flex: 100%;
+}
+
+md-dialog-actions {
+    min-height: 50px;
+}
+
+.configure-item {
+    padding: 0 !important;
+}
+
+// #popupContainer {
+//     position: relative;
+// }
+
+md-dialog-actions .md-button {
+    white-space: normal;
+    line-height: 20px;
+}
+
+/*** end of md-dialog ***/
+
+/*** md-tab ***/
+
+/*** end of md-tab ***/
+
+md-fab-toolbar.md-fab-bottom-right {
+    right: 0;
+    bottom: 0;
+    left: auto;
+    position: absolute;
+    width: 100%;
+}
+
+md-toolbar md-menu {
+    padding-bottom: 0 !important;
+    padding-top: 0 !important;
+}
+
+.nav-toolbar-button {
+    margin: 0;
+    padding: 0;
+    max-width: 60px;
+}
+
+.bottom-toolbar-button {
+    margin: 0;
+    padding: 0;
+}
+
+md-sidenav {
+    height: 100%;
+    #sidenav-body {
+        height: 100%;
+    }
+    .md-button {
+        box-shadow: none !important;
+        border-radius: 0;
+        cursor: pointer;
+        display: block;
+        align-items: inherit;
+        line-height: 60px;
+        margin: 0;
+        max-height: 60px;
+        overflow: hidden;
+        padding: 0px 16px;
+        text-align: left;
+        white-space: normal;
+        width: 100%;
+    }
+    md-list-item {
+        padding: 0 !important;
+        md-icon {
+            width: 30px;
+            padding-bottom: 5px;
+            padding-right: 15px;
+        }
+    }
+}
+
+/** End of Side Nav */
+
+.att-split-button {
+    margin-right:0;
+    padding-right:0;
+    padding-bottom:8px;
+}
+
+.att-split-button-icon {
+    height: 40px !important;
+    width: 40px !important;
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+
+/*** Content ***/
+.toolbar-button {
+    min-width: 40px;
+}
+
+.percent-complete-orange {
+    background-color: @reviewOrangeValueColor;
+    color: #333;
+    border-bottom: 1px solid orange;
+    padding: 2px;
+}
+
+.percent-complete-green {
+    background-color: @reviewGreenValueColor;
+    color: #333;
+    border-bottom: 1px solid green;
+    padding: 2px;
+}
+
+/*** End of Content ***/
+
+
+/*** md-icon ***/
+.form-admin-container {
+    padding-bottom: 20px;
+}
+
+.nav-toolbar-button md-icon {
+    margin: 0 !important;
+    padding: 0;
+}
+
+.toolbar-icon {
+    padding: 3px 5px 0 0;
+}
+
+
+.att-svg {
+    margin: 5px;
+}
+
+.att-svg-up {
+    margin-bottom: 9px;
+}
+
+.sv32 {
+    width: 32px;
+    height: 32px;
+}
+
+.sv28 {
+    width: 28px;
+    height: 28px;
+}
+
+.sv24 {
+    width: 24px;
+    height: 24px;
+}
+
+.sv20 {
+    width: 20px;
+    height: 20px;
+}
+
+.sv18 {
+    width: 18px;
+    height: 18px;
+}
+
+.sv16 {
+    width: 16px;
+    height: 16px;
+}
+
+.sv12 {
+    width: 12px;
+    height: 12px;
+}
+
+.svLock {
+    color: @svgLockOrangeColor;
+}
+
+.flip-image-h {
+    transform: scaleX(-1);
+    filter: FlipH;
+}
+
+md-toolbar .md-toolbar-tools .md-button,
+md-toolbar .md-toolbar-tools .md-button:hover,
+.att-question-header .md-button
+.att-question-header .md-button:hover {
+    background: transparent !important;
+    transform: none;
+}
+
+.att-top-nav {
+    padding: 0;
+    .md-menu {
+        margin: 0;
+    }
+    .md-toolbar-tools {
+        padding: 0;
+    }
+    #left-section {
+        overflow: hidden;
+        margin-left: 10px;
+        md-icon {
+            padding: 0;
+            margin: 0;
+        }
+    }
+}
+
+/*** end of md-icon ***/
+
+/*** End of Angular Material ***/
+
+
+/* end of formly form styles */
+
+/* Survey Admin Styles */
+
+#survey-review {
+    .review-targets-header {
+        padding: 0;
+        vertical-align: middle;
+        text-align: right;
+        display: inline;
+        background-color: @cardHeaderColor;
+    }
+
+    .review-targets-header-left {
+        text-align: left;
+        padding: 15px;
+        font-weight: bold;
+    }
+
+    .review-header {
+        width: 100%;
+        min-height: 40px;
+        height: 45px;
+        line-height: 45px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 1.5em;
+        text-align: center;
+        background-color: gray;
+        color: white
+    }
+
+    .review-header-no-color {
+        width: 100%;
+        min-height: 40px;
+        height: 45px;
+        line-height: 45px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        font-size: 1.5em;
+        text-align: center;
+        color: white
+    }
+
+    .review-scorecard-header {
+        background-color: black;
+        color: white;
+        padding: 2px;
+    }
+
+    .review-questions-header {
+        background-color: @cardHeaderColor;
+    }
+
+    .review-question {
+        padding-left: 10px;
+        width: 90%;
+        margin-bottom: 3px;
+    }
+
+    .review-answer {
+        padding-left: 20px;
+        font-weight: bold;
+        display: inline;
+        padding-right: 20px;
+    }
+
+    .review-correct-no-points {
+        color: #0f0;
+    }
+
+    .review-required {
+        color: red;
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+
+    .review-answer-correct {
+        padding-left: 20px;
+        font-weight: bold;
+        display: inline;
+        padding-right: 20px;
+        border-bottom: 1px solid #009900;
+        background-color: @reviewGreenValueColor;
+    }
+
+    .review-answer-incorrect {
+        padding-left: 20px;
+        font-weight: bold;
+        display: inline;
+        padding-right: 20px;
+        border-bottom: 1px solid red;
+        background-color: @reviewRedValueColor;
+    }
+
+    .review-answer-partial {
+        padding-left: 20px;
+        font-weight: bold;
+        display: inline;
+        padding-right: 20px;
+        border-bottom: 1px solid #ffcc00;
+        background-color: @reviewOrangeValueColor;
+    }
+
+    .review-points {
+        background-color: #777;
+        color: white;
+        padding-left: 5px;
+        padding-right: 5px;
+        border-radius: 4px;
+        font-weight: bold;
+        position: relative;
+        white-space: nowrap;
+        display: inline;
+    }
+
+    .review-icon-legend {
+        border: 1px solid gray;
+        padding: 4px;
+        font-size: .8em;
+        color: gray;
+        background-color: @reviewScoreBGColor;
+        border-radius: 4px;
+    }
+
+    .review-text-center {
+        text-align: center;
+    }
+
+    .review-text-center-middle {
+        text-align: center;
+        vertical-align: middle;
+        line-height: 50px;
+    }
+
+    .reviewIconIncorrect {
+        color: red;
+    }
+
+    .reviewIconIncomplete {
+        color: orange;
+    }
+
+    [data-icon]:before { font-family: icons; /* BYO icon font, mapped smartly */ content: attr(data-icon); }
+
+    .icon-alone { display: inline-block; /* Chrome 19 was weird with clickability without this */ }
+
+    .review-no-answer {
+        background-color: @reviewRedValueColor;
+    }
+}
+
+.section-divider {
+    margin-bottom: 0;
+    margin-left: 16px;
+    margin-right: 17px;
+    text-align: center;
+    border-top: 1px solid @sectionDividerColor;
+}
+
+.section-divider > h4 {
+    margin-bottom: 0;
+    margin-top: 5px;
+}
+
+.section-divider > p {
+    margin-top: 2px;
+    margin-bottom: 0;
+    font-size: .8em;
+}
+
+
+/**
+ * For the correct positioning of the placeholder element, the dnd-list and
+ * it's children must have position: relative
+ */
+md-list[dnd-list],
+md-list[dnd-list] > md-list-item {
+    position: relative;
+}
+
+/**
+ * The dnd-list should always have a min-height,
+ * otherwise you can't drop to it once it's empty
+ */
+md-list[dnd-list] {
+    min-height: 80px;
+    padding-left: 0px;
+    margin-top: 0;
+}
+
+/**
+ * The dndDraggingSource class will be applied to
+ * the source element of a drag operation. It makes
+ * sense to hide it to give the user the feeling
+ * that he's actually moving it.
+ */
+md-list[dnd-list] .dndDraggingSource {
+    display: none;
+}
+
+/**
+ * An element with .dndPlaceholder class will be
+ * added to the dnd-list while the user is dragging
+ * over it.
+ */
+md-list[dnd-list] .dndPlaceholder {
+    display: block;
+    background-color: @placeHolderColor;
+    min-height: 100px;
+}
+
+/**
+ * The dnd-lists's child elements currently MUST have
+ * position: relative. Otherwise we can not determine
+ * whether the mouse pointer is in the upper or lower
+ * half of the element we are dragging over. In other
+ * browsers we can use event.offsetY for this.
+ */
+md-list[dnd-list] md-list-item {
+    display: block;
+}
+
+.handle {
+    cursor: move;
+    padding-top: 10px;
+}
+
+.att-complete {
+    color: @completeColor;
+}
+
+.att-section,
+.list-subheader {
+    background-color: @listSubheaderBackgroundColor;
+}
+
+.att-question {
+    background-color: @attQuestionColor;
+}
+
+md-list[dnd-list] md-list-item {
+    padding: 0;
+}
+
+md-list[dnd-list] md-list-item::before, md-list[dnd-list] md-list-item .md-list-item-inner::before {
+    display: inline;
+}
+
+/* End of Survey Admin Styles */
+
+
+/* Angular Material */
+html,
+body {
+    /* to keep the user from scrolling horizontally*/
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+}
+
+footer {
+    margin-top: 5px !important;
+}
+
+.app-content {
+    max-width: 960px;
+}
+
+
+/* Toolbar area */
+
+.menu {
+    border: none;
+    height: 38px;
+    margin: 16px;
+    width: 36px;
+}
+
+md-toolbar h1 {
+    margin: auto;
+}
+
+
+.bottom-toolbar {
+    height: @bottomToolBarHeight;
+    min-height: @bottomToolBarHeight;
+    max-height: @bottomToolBarHeight;
+}
+
+.bottom-toolbar-tools {
+    height: @bottomToolBarHeight;
+}
+
+/* Primary content area */
+
+#content {
+    overflow: hidden;
+}
+
+#content {
+    padding-left: 40px;
+    padding-right: 40px;
+    padding-top: 5px;
+}
+
+#content .md-button.contact {
+    border: none;
+    width: 48px;
+    height: 48px;
+    margin: 8px auto 16px 0;
+    position: absolute;
+    top: 10px;
+    right: 40px;
+}
+
+#content md-icon.avatar {
+    margin-top: 10px;
+}
+
+#content .md-button.contact > md-icon {
+    fill: black;
+    width: 36px;
+    height: 36px;
+}
+
+md-button.menuBtn > md-icon {
+    fill: white;
+    width: 24px;
+    height: 24px;
+}
+
+#content .md-button.contact:active > md-icon {
+    border-radius: 75%;
+    padding: 4px;
+    transition: all 100ms ease-out 30ms;
+}
+
+#content img {
+    display: block;
+    height: auto;
+    max-width: 500px;
+}
+
+
+/* Utils */
+
+.content-wrapper {
+    position: relative;
+}
+
+/* Angular Material */
+
+/*#region Splash */
+
+#splash-page {
+    z-index: 99999 !important;
+}
+
+#splash-page .bar {
+    width: 100%;
+}
+
+.page-splash {
+    z-index: 99999 !important;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: .9;
+    pointer-events: auto;
+    backface-visibility: hidden;
+    transition: opacity 0.3s linear;
+}
+
+.page-splash-message {
+    text-align: center;
+    margin: 20% auto 0 auto;
+    font-size: 400%;
+    font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    text-shadow: 2px 2px @splashMessageShaddowColor;
+    text-decoration: none;
+    padding: 0;
+}
+
+.page-splash-message.page-splash-message-subtle {
+    margin: 30% auto 0 auto;
+    font-size: 200%;
+}
+
+.flag-haschanges {
+    position: fixed !important;
+    display: inline;
+}
+
+// .progress,
+// .page-progress-bar {
+//     margin: 30px 10% !important;
+// }
+
+// .ngplus-overlay-background {
+//     top: 0px;
+//     left: 0px;
+//     padding-left: 100px;
+//     position: absolute;
+//     z-index: 10000;
+//     height: 100%;
+//     width: 100%;
+//     background-color: #808080;
+//     opacity: 0.2;
+// }
+
+.ngplus-overlay-content {
+    position: absolute;
+    font-weight: bold;
+    height: 100px;
+    width: 300px;
+    height: 15em;
+    width: 20em;
+    z-index: 10000;
+    text-align: center;
+}
+
+.spinner {
+    margin: 20% auto 0 auto;
+    left: auto;
+    top: auto !important;
+}
+
+// .page-spinner-message {
+//     text-align: center;
+//     font-size: 400%;
+//     font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+//     font-weight: normal;
+//     text-shadow: 2px 2px #000000;
+//     text-shadow: 2px 2px rgba(0, 0, 0, 0.15);
+//     text-transform: uppercase;
+//     text-decoration: none;
+//     // color: #F58A00;
+//     padding: 0;
+// }
+
+// .page-spinner-message.page-spinner-message-subtle {
+//     margin: 30% auto 0 auto;
+//     font-size: 200%;
+// }
+
+// .overlay-message {
+//     font-size: 200%;
+// }
+
+
+
+/*#endregion*/
+
+/* Custom DoRight styles */
+
+
+.help-button {
+    background: @helpButtonBackground;
+    border: 0px;
+    border-radius: 25px;
+    margin-left: 5px;
+}
+
+.name-title {
+    color: @targetNameTitleColor;
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 5px;
+}
+
+.target-detail-title {
+    color: @targetDetailTitleColor;
+    font-weight: 500;
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+.target-detail-value {
+    color: @targetDetailValueColor;
+    font-weight: 500;
+    font-size: 14px;
+    margin-right: 4px;
+}
+
+.row-info {
+    line-height: 22px;
+    min-height: 60px;
+    padding: 8px 0px;
+}
+
+md-virtual-repeat-container .row-info {
+    border-bottom: 1px solid @containerBorderColor;
+    margin: 0px 0px;
+    padding: 16px 0px;
+}
+
+.md-list-item-text {
+    line-height: normal;
+}
+
+#survey-header {
+    padding: 4px 16px 4px 16px;
+}
+
+.survey-option button {
+    line-height: inherit;
+}
+
+.help-item {
+    padding: 8px 0 8px 0;
+}
+
+#target-virtual-container .target-list-item {
+    display: flex;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#target-virtual-container .md-list-item-icon {
+    margin: auto 0 auto 0;
+}
+
+#target-virtual-container .md-virtual-repeat-scroller {
+    margin: 5px 0 0 0;
+}
+
+#form-widget-body .widget-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.icon-label {
+    font-size: 10px;
+    margin-top: -10px;
+}
+
+md-toolbar md-icon {
+    cursor: pointer;
+}
+
+.row-item-data-section.with-button {
+    display: inline-block;
+    width: 70%;
+}
+
+.list-subheader {
+    padding: 0;
+}
+
+.list-subheader button {
+    float: right;
+    padding: 0;
+    margin: 7px 10px 0px 0;
+    line-height: 25px;
+    min-width: 40px;
+}
+
+.subheader-data {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.att-toolbar-icon-button {
+    border: 1px solid white;
+    box-shadow: 3px 3px 3px #333;
+}
+
+.att-toolbar-icon-button:hover {
+    border: 1px solid #fff;
+    box-shadow: 1px 1px 3px black;
+}
+
+#survey-list .md-subheader .md-subheader-inner {
+    padding: 0 0 0 16px;
+}
+
+#campaignForm .row-info {
+    transform: translate3d(0,0,0);
+}
+
+
+/* End of Custom Styles */
+
+/* Responsive */
+@media (max-width: 480px) {
+    .nav-toolbar-button {
+        margin: 0;
+        padding: 0;
+        max-width: 40px;
+    }
+
+    #admin-proprietary-statement {
+        font-size: 8px;
+        text-align: justify;
+        margin: 5px;
+        display: block;
+    }
+
+    #survey-toolbar{
+        .md-button {
+            min-width: 50px;
+        }
+    }
+
+    .back-button {
+        margin:0;
+        padding: 0;
+        font-size: 0.5em;
+    }
+
+    .bottom-toolbar-button {
+        min-width: 70px;
+    }
+
+    #survey-dialog {
+        margin: 0;
+    }
+}
+
+@media (max-height: 530px) {
+    #admin-proprietary-statement {
+        margin-top: 0;
+        max-height: 20px;
+    }
+}
+
+@media (min-width: 481px) {
+    .toolbar-icon-button {
+        margin-top: 6px !important;
+    }
+}
+
+@media (max-width: 599px) {
+    .matrix-button {
+        margin-bottom: 10px !important;
+    }
+
+    .att-list-title {
+        text-align: left;
+        color: @listTitleColor;
+        font-weight: bold !important;
+        font-size: 14px;
+        margin-bottom: 4px;
+        margin-left: 20px;
+        margin-right: 20px;
+        background-color: @listBGColor;
+        padding: 2px;
+    }
+
+    .att-list-value {
+        text-align: left;
+        font-size: 14px;
+        margin-top: 0px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+// @media screen and (max-width: 767px) {
+
+// }
+
+// @media (min-width: 768px) and (max-width: 959px) {
+
+// }
+
+@media (min-width: 600px) {
+    .radio-no-text {
+        width: 20px;
+    }
+
+    #matrix-container {
+        .flex-gt-xs-50 {
+            max-width: 50%;
+            flex: 1 1 0;
+        } 
+    }
+}
+
+@media screen and (min-width: 960px) {
+    #app-logo {
+        max-width: 55px;
+    }
+}

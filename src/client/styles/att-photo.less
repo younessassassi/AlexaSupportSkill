@@ -1,0 +1,48 @@
+.orient2 {
+    transform: scaleX(-1);
+    filter: FlipH
+}
+
+.orient3 {
+    transform: rotate(180deg)
+}
+
+.orient4 {
+    transform: scaleX(-1) rotate(180deg);
+    filter: FlipH
+}
+
+.orient5 {
+    transform: scaleX(-1) rotate(90deg);
+    filter: FlipH
+}
+
+.orient6 {
+    transform: rotate(90deg)
+}
+
+.orient7 {
+    transform: scaleX(-1) rotate(-90deg);
+    filter: FlipH
+}
+
+.orient8 {
+    transform: rotate(-90deg)
+}
+
+.image-container {
+    overflow: hidden;
+    .loaded-image {
+        height: auto;
+        width: auto;
+        max-width: 500px;
+    }
+}
+
+@media (max-width: 599px) {
+    .image-container {
+        .loaded-image {
+            max-width: 300px;
+        }
+    }
+}

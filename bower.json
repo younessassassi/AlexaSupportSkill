@@ -1,0 +1,41 @@
+{
+  "name": "att_help",
+  "version": "0.0.1",
+  "description": "ATT store queue",
+  "authors": [
+    "Youness Assassi"
+  ],
+  "license": "ATT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular-mocks": "^1.4.5",
+    "bardjs": "^0.1.4",
+    "sinon": "http://sinonjs.org/releases/sinon-1.12.1.js"
+  },
+  "dependencies": {
+    "jquery": "^2.1.4",
+    "angular-sanitize": "^1.4.5",
+    "extras.angular.plus": "^0.9.2",
+    "font-awesome": "^4.3.0",
+    "moment": "^2.10.3",
+    "angular-ui-router": "^0.2.15",
+    "toastr": "^2.1.1",
+    "angular-animate": "^1.4.5",
+    "angular-cache": "~4.4.2",
+    "lodash": "~3.10.1",
+    "angular": "^1.5.2",
+    "angular-material": "^1.1.4"
+  },
+  "resolutions": {
+    "angular": "1.6.3",
+    "angular-animate": "1.6.3",
+    "sinon": "*"
+  },
+  "overrides": {}
+}

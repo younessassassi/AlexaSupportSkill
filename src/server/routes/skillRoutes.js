@@ -1,5 +1,5 @@
 var express = require('express'),
-    alexaVerifier = require('alexa-verifier')
+    alexaVerifier = require('alexa-verifier'),
     skillsJson = require('../data/skillJson.js'),
     responsestub = require('../misc/response');
 
@@ -21,12 +21,12 @@ var routes = function (Skill) {
     }
     var skillRouter = express.Router();
     // skillRouter.use('/', requestVerifier, function(req, res, next) {
-        
-    skillRouter.use('/', function(req, res, next) {
-        Skill.findOne({}, function(err, skill) {
+
+    skillRouter.use('/', function (req, res, next) {
+        Skill.findOne({}, function (err, skill) {
             if (err) {
                 res.status(500).send(err);
-            } else if(skill) {
+            } else if (skill) {
                 req.skill = skill;
                 next();
             } else {
@@ -35,19 +35,19 @@ var routes = function (Skill) {
         });
     });
     skillRouter.route('/')
-        .post(function(req, res) {
+        .post(function (req, res) {
             console.log('success');
             res.json(responsestub);
-            // res.status(201).json(req.skill); 
+            // res.status(201).json(req.skill);
         })
         .get(function (req, res) {
             res.json(responsestub);
             // res.json(req.skill);
         });
-        
+
     skillRouter.route('/admin')
-        .get(function(req, res) {
-            Skill.insertMany(skillsJson, function(err, data) {
+        .get(function (req, res) {
+            Skill.insertMany(skillsJson, function (err, data) {
                 if (err) {
                     res.status(500).send(err);
                 } else {

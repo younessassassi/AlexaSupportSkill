@@ -1,0 +1,110 @@
+@containerBorderColor: rgba(0,0,0,0.12);
+@mainTitleColor: rgba(0,0,0,1);
+@subtitleLabelColor: #5C5C70;
+@subtitleValueColor: rgba(0,0,0,0.75);
+@helpButtonBackground: rgb(224,224,224);
+
+#att-list {
+    width: 100%;
+    .trunc-text {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    md-list {
+        padding: 0;
+    }
+
+    md-list-item {
+        width: 100%;
+        .container {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            top: 0;
+        }
+    }
+
+    .row-info {
+        width: 95%;
+        line-height: 22px;
+        padding: 8px 0px;
+    }
+
+    .carrot {
+        font-size: 1.4em;
+        font-weight: bold;
+    }
+
+    .md-list-item-text {
+        line-height: normal;
+    }
+
+    .main-title {
+        color: @mainTitleColor;
+        font-size: 16px;
+        font-weight: bold;
+        padding-top: 5px;
+    }
+
+    .subtitle-label {
+        color: @subtitleLabelColor;
+        font-weight: bold;
+        font-size: 14px;
+        margin-right: 4px;
+    }
+
+    .name-title-bar {
+        background: #ddd;
+        background: linear-gradient(to right, #ddd, #f8f8f8);
+        background-color: #ddd;
+        padding: 5px;
+        border-radius: 3px;
+    }
+
+    .att-button {
+        box-shadow: 1px 1px 5px gray;
+        border: 1px solid white;
+        border-radius: 2px;
+    }
+
+    @media (max-width: 600px) {
+        .att-button { min-width: 60px; }
+    }
+
+    .subtitle-value {
+        color: @subtitleValueColor;
+        font-weight: 500;
+        font-size: 14px;
+        margin-right: 4px;
+    }
+
+    .row-item-data-section.with-button,
+    .row-info.with-button {
+        display: inline-block;
+        width: 70%;
+    }
+
+    .secondary-button-padding p {
+        padding-right: 100px;
+        line-height: 28px;
+    }
+}
+
+#filter-subheader .md-subheader-inner {
+    padding: 10px;
+    padding-bottom: 4px;
+
+    .status-filter {
+        font-size: .9em;
+        margin-top: 9px !important;
+        min-height: 40px;
+    }
+
+    .filter-container {
+        min-height: 40px;
+        padding: 0;
+    }
+}

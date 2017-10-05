@@ -1,0 +1,22 @@
+﻿<md-sidenav
+    class="md-sidenav-left"
+    md-component-id="left"
+    md-is-locked-open="$mdMedia('gt-sm')"
+     md-whiteframe="4">
+    <md-toolbar class="md-theme-primary">
+        <h1 class="md-toolbar-tools">AT&T Help</h1>
+    </md-toolbar>
+    <md-content flex>
+        <md-list layout="column" flex ng-controller="SidebarController as vm">
+            <md-list-item ng-repeat="r in vm.navRoutes">
+                <md-button ng-class="vm.isCurrent(r)"
+                    ng-click="vm.menuItemClicked(r.name)"
+                    aria-label="{{r.name}}"
+                    ng-bind-html="r.settings.content">
+                </md-button>
+                <md-divider></md-divider>
+            </md-list-item>
+        </md-list>
+        <md-divider></md-divider>
+    </md-content>
+</md-sidenav>
