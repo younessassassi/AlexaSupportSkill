@@ -8,8 +8,8 @@
     /* @ngInject */
     function dataservice($http, $q, CacheFactory, exception, logger) {
         var service = {
-            getPeople: getPeople,
-            getMessageCount: getMessageCount,
+            clearCustomerFromQueue: clearCustomerFromQueue,
+            getCustomersInQueue: getCustomersInQueue,
             removeAllItemsFromCache: removeAllItemsFromCache
         };
 
@@ -23,19 +23,38 @@
 
         return service;
 
-        function getMessageCount() { return $q.when(72); }
-
-        function getPeople() {
-            return $http.get('/api/routes/people')
+        function getCustomersInQueue() {
+            return $http.get('/api/queue')
                 .then(success)
                 .catch(fail);
 
             function success(response) {
-                return response.data;
+                var data = _.filter(response.data, function(obj) {
+                    return !angular.isDefined(obj.clearedTime);
+                })
+                data = _.sortBy(data, function(value) {return new Date(value);});
+
+                console.log('data', data);
+                return data;
             }
 
             function fail(e) {
-                return exception.catcher('XHR Failed for getPeople')(e);
+                return exception.catcher('XHR Failed for getCustomers')(e);
+            }
+        }
+
+        function clearCustomerFromQueue(customerId) {
+            var params = {};
+            return $http.patch('/api/queue/'+ customerId, params)
+                .then(success)
+                .catch(fail);
+
+            function success(response) {
+                return 'Success';
+            }
+
+            function fail(e) {
+                return exception.catcher('XHR Failed for clear customer')(e);
             }
         }
 

@@ -13,15 +13,18 @@
         <md-dialog-content>
             <div class="md-dialog-content">
                 <md-list id="row-list">
-                    <md-list-item flex><span flex="20" class="row-heading">Phone Number</span><span class="row-data">{{customer.phone}}</span></md-list-item>
-                    <md-list-item flex><span flex="20" class="row-heading">BAN</span><span class="row-data">{{customer.ban}}</span></md-list-item>
-                    <md-list-item flex><span flex="20" class="row-heading">Reason for visit</span><span class="row-data">{{customer.reasonForVisit}}</span></md-list-item>
+                    <md-list-item flex><span flex="35" class="row-heading">Phone Number</span><span class="row-data">{{customer.phone}}</span></md-list-item>
+                    <md-list-item flex><span flex="35" class="row-heading">BAN</span><span class="row-data">{{customer.ban}}</span></md-list-item>
+                    <md-list-item flex><span flex="35" class="row-heading">Reason for visit</span><span class="row-data">{{customer.visitReason}}</span></md-list-item>
                 </md-list>
             </div>
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
             <span flex></span>
+            <md-button ng-click="clearCustomer()">
+                Clear From Queue
+            </md-button>
             <md-button ng-click="cancel()">
                 Done
             </md-button>

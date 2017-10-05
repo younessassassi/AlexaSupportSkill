@@ -6,7 +6,7 @@
         .controller(controllerId, DashboardController);
 
     /* @ngInject */
-    function DashboardController($q, $mdDialog, confirmDialog, dataservice, logger) {
+    function DashboardController($q, $mdDialog, $interval, confirmDialog, dataservice, logger) {
         var vm = this;
         var getLogFn = logger.getLogFn;
         var log = getLogFn(controllerId);
@@ -21,7 +21,8 @@
         activate();
 
         function activate() {
-            var promises = [getMessageCount(), getPeople()];
+            var promises = [getCustomersInQueue()];
+            $interval(function() {getCustomersInQueue()}, 10000);
             return $q.all(promises).then(function () {
                 log('Activated Dashboard View');
             });
@@ -32,12 +33,14 @@
             var okButtonText = 'Confirm';
             confirmDialog.confirmationDialog(okButtonText, message, okButtonText, 'Cancel')
                 .then(function () {
-                    // adminDataService.upsertTeam(vm.teamModel, _isExistingTeam)
-                    //     .then(function () {
-                    //         goToListView();
-                    //     }, function(error) {
-                    //         logError('There was a problem when we tried to insert the team information', error, true);
-                    //     });
+                    dataservice.clearCustomerFromQueue(customer._id).then(
+                        function() {
+                            getCustomersInQueue();
+                        }, 
+                        function(error) {
+                            logError('There was a problem when we tried to clear the customer from the queue', error, true);
+                        } 
+                    );
                 });
         }
 
@@ -67,10 +70,21 @@
             });
         }
 
-        function DialogController($scope, $mdDialog, customer) {
+        function DialogController($scope, $mdDialog, dataservice, customer) {
             $scope.customer = customer;
             $scope.hide = function () {
                 $mdDialog.hide();
+            };
+
+            $scope.clearCustomer = function () {
+                dataservice.clearCustomerFromQueue(customer._id).then(
+                    function() {
+                        getCustomersInQueue();
+                    }, 
+                    function(error) {
+                        logError('There was a problem when we tried to clear the customer from the queue', error, true);
+                    } 
+                );
             };
 
             $scope.cancel = function () {
@@ -78,26 +92,14 @@
             };
         }
 
-        function getMessageCount() {
-            return dataservice.getMessageCount().then(function (data) {
-                vm.messageCount = data;
-                return vm.messageCount;
-            });
-        }
-
-        function getPeople() {
-            return dataservice.getPeople().then(function (data) {
-                var customers = [];
+        function getCustomersInQueue() {
+            return dataservice.getCustomersInQueue().then(function (customers) {
                 var queueOrder = 1;
                 var remainingTime = 0;
-                angular.forEach(data, function (per) {
+                angular.forEach(customers, function (customer) {
                     remainingTime += 10;
-                    var person = {
-                        order: queueOrder++,
-                        name: per.firstName,
-                        waitTime: remainingTime + ' min'
-                    };
-                    customers.push(person);
+                    customer.order = queueOrder++;
+                    customer.waitTime = remainingTime + ' min';
                 });
                 vm.customers = customers;
                 return customers;
