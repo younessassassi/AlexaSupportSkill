@@ -18,7 +18,7 @@
         };
 
         /* @ngInject */
-        function TopNavController($rootScope, $mdSidenav, 
+        function TopNavController($rootScope, $mdSidenav,
             $q, $state, $location, logger) {
             var vm = this;
 

@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     var core = angular.module('app.core');
@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function uirouterRun($rootScope, $state, routerHelper, config) {
-        
+
         $rootScope.history = [];
         $rootScope.isBackButtonNeeded = false;
         $rootScope.previousState = '';

@@ -11,7 +11,7 @@
 
         vm.isCurrent = isCurrent;
         vm.menuItemClicked = menuItemClicked;
-        
+
         var states = routerHelper.getStates();
 
         activate();
@@ -19,7 +19,6 @@
         function activate() {
             getNavRoutes();
         }
-
 
         function menuItemClicked(route) {
             if (!$mdSidenav('left').isLockedOpen()) {

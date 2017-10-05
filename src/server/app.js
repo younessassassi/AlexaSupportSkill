@@ -24,6 +24,7 @@ app.use(logger('dev'));
 
 var Book = require('./models/bookModel');
 var Skill = require('./models/skillModel');
+var Customer = require('./models/customerModel');
 
 var port = process.env.PORT || 5000;
 
@@ -32,10 +33,12 @@ app.use(bodyParser.json());
 
 var bookRouter = require('./routes/bookRoutes')(Book);
 var skillRouter = require('./routes/skillRoutes')(Skill);
+var queueRouter = require('./routes/queueRoutes')(Customer);
 var deploymentRoutes = require('./routes/deploymentRoutes');
 
 app.use('/api/books', bookRouter);
 app.use('/api/skill', skillRouter);
+app.use('/api/queue', queueRouter);
 app.use('/api/routes', deploymentRoutes);
 
 switch (environment) {
