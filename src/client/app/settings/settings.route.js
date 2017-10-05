@@ -22,7 +22,8 @@
                     title: 'Settings',
                     settings: {
                         nav: 20,
-                        content: '<i class="fa fa-cogs"></i> Settings'
+                        content: 'Settings',
+                        svg: 'cogs'
                     }
                 }
             }

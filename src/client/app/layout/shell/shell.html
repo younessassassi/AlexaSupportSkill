@@ -1,7 +1,6 @@
-<md-content layout="row" flex tabIndex="-1"
+<md-content ng-controller="ShellController as vm"
+    layout="row" flex tabIndex="-1"
     role="main" class="md-whiteframe-z2"
-    ng-controller="ShellController as vm"
-    md-theme="{{theme}}" md-theme-watch="true"
     id="popupContainer">
     <div layout="row" ht-sidebar></div>
     <md-content layout="column" flex>
@@ -13,11 +12,12 @@
 
 </md-content>
 
-<div ngplus-overlay
+<div ng-hide = "attHideSpinner"
+     ngplus-overlay
      ngplus-overlay-delay-in="50"
      ngplus-overlay-delay-out="700"
      ngplus-overlay-animation="dissolve-animation">
-    <img src="images/busy.gif"/>
+    <md-progress-circular md-mode="indeterminate" class="spinner" md-diameter="96"></md-progress-circular>
 
     <div class="page-spinner-message overlay-message">{{vm.busyMessage}}</div>
 </div>

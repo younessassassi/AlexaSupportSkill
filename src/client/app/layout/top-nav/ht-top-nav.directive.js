@@ -1,14 +1,14 @@
 /* jshint -W106, -W074 */
 /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
-(function() {
+(function () {
     'use strict';
-
+    var controllerId = ' TopNavController';
     angular
         .module('app.layout')
         .directive('htTopNav', htTopNav);
 
     /* @ngInject */
-    function htTopNav () {
+    function htTopNav() {
         var directive = {
             bindToController: true,
             controller: TopNavController,
@@ -18,32 +18,52 @@
         };
 
         /* @ngInject */
-        function TopNavController($rootScope, $mdSidenav, $mdBottomSheet,
-                                  $q, $window, dataservice, logger) {
+        function TopNavController($rootScope, $mdSidenav, 
+            $q, $state, $location, logger) {
             var vm = this;
-            vm.title = 'AT&T Help';
 
             var getLogFn = logger.getLogFn;
-            var log = getLogFn(TopNavController);
+            var log = getLogFn(controllerId);
+            var logWarning = getLogFn(controllerId, 'warning');
+
+            vm.title = 'PLE Surveys';
 
             vm.toggleSideMenu = toggleSideMenu;
+            vm.goBack = goBack;
+
+            // vm.leftNavButtonClicked = leftNavButtonClicked;
 
             activate();
 
             function activate() {
                 var promises = [];
-                return $q.all(promises).then(function() {
+                return $q.all(promises).then(function () {
                     log('Activated Top Nav Controller');
                 });
             }
 
+            function goBack() {
+                var stateHistoryLength = $rootScope.history.length;
+                var prevStateObj = $rootScope.history.length > 0 ?
+                    $rootScope.history[$rootScope.history.length - 1] : null;
+                if (!!prevStateObj) {
+                    var state = prevStateObj.state.name;
+                    var params = prevStateObj.params;
+                    $state.go(state, params);
+                } else {
+                    // no previous states were found
+                    logWarning('No previous states were found', prevStateObj, true);
+                    $location('/');
+                }
+            }
+
             function toggleSideMenu() {
                 $mdSidenav('left').toggle();
-                // var pending = $mdBottomSheet.hide() || $q.when(true);
-                // pending.then(function() {
-                //     $mdSidenav('left').toggle();
-                // });
             }
+
+            // function leftNavButtonClicked() {
+            //     $rootScope.$broadcast(ATT_BROADCAST.leftNavBtnClicked, $rootScope.attLeftNavButtonConfig);
+            // }
         }
         return directive;
     }

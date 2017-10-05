@@ -18,10 +18,11 @@
                 templateUrl: 'app/dashboard/dashboard.html',
                 controller: 'DashboardController',
                 controllerAs: 'vm',
-                title: 'dashboard',
+                title: 'Store Queue',
                 settings: {
                     nav: 1,
-                    content: '<i class="fa fa-dashboard"></i> Dashboard'
+                    content: 'Dashboard',
+                    svg: 'tachometer'
                 }
             }
         }];

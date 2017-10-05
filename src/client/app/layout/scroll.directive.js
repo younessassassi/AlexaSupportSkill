@@ -20,10 +20,10 @@
                 // console.log('attr.scroll: ', attr.scroll);
                 if (angular.isDefined(attr.scroll) &&
                     angular.isDefined(newVal) && angular.isDefined(oldVal)) {
-                    // console.log('new val length: ', newVal.length);
-                    // console.log('new val: ', newVal);
                     // console.log('old val length: ', oldVal.length);
                     // console.log('old val: ', oldVal);
+                    // console.log('new val length: ', newVal.length);
+                    // console.log('new val: ', newVal);
 
                     // only scroll down if a new elment is added
                     if (oldVal.length < newVal.length) {

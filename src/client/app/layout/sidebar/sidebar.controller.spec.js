@@ -3,8 +3,7 @@ describe('layout', function() {
     describe('sidebar', function() {
         var controller;
         var views = {
-            dashboard: 'app/dashboard/dashboard.html',
-            forms: 'app/forms/forms.html'
+            surveys: 'app/answer-surveys/surveys.html'
         };
 
         beforeEach(function() {
@@ -28,9 +27,9 @@ describe('layout', function() {
                 .to.equal('md-accent md-hue-3 md-raised');
         });
 
-        it('should have isCurrent() for /forms to return `md-accent md-hue-3 md-raised`',
+        it('should have isCurrent() for /surveys to return `md-accent md-hue-3 md-raised`',
             function() {
-            $location.path('/forms');
+            $location.path('/list');
             expect(controller.isCurrent($state.current))
                 .to.equal('md-accent md-hue-3 md-raised');
         });

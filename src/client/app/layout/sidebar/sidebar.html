@@ -1,22 +1,31 @@
-﻿<md-sidenav
-    class="md-sidenav-left"
-    md-component-id="left"
-    md-is-locked-open="$mdMedia('gt-sm')"
-     md-whiteframe="4">
-    <md-toolbar class="md-theme-primary">
-        <h1 class="md-toolbar-tools">AT&T Help</h1>
-    </md-toolbar>
-    <md-content flex>
-        <md-list layout="column" flex ng-controller="SidebarController as vm">
-            <md-list-item ng-repeat="r in vm.navRoutes">
-                <md-button ng-class="vm.isCurrent(r)"
-                    ng-click="vm.menuItemClicked(r.name)"
-                    aria-label="{{r.name}}"
-                    ng-bind-html="r.settings.content">
-                </md-button>
-                <md-divider></md-divider>
-            </md-list-item>
-        </md-list>
-        <md-divider></md-divider>
-    </md-content>
+﻿<md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-whiteframe="4">
+    <div id="sidenav-body" layout="column" flex>
+        <md-toolbar class="md-theme-indigo">
+            <h1 class="md-toolbar-tools">
+                <img ng-src="{{appLogo}}" id="app-logo" /> AT&T Help
+            </h1>
+        </md-toolbar>
+        <md-content layout="column" flex>
+            <md-list layout="column" ng-controller="SidebarController as vm">
+                <md-list-item ng-repeat="r in vm.navRoutes">
+                    <md-button ng-class="vm.isCurrent(r)" ng-click="vm.menuItemClicked(r.name)" aria-label="{{r.name}}">
+                        <md-icon style="width: 30px; padding-bottom: 5px;" md-svg-icon="{{r.settings.svg}}">
+                        </md-icon>
+                        {{r.settings.content}}
+                    </md-button>
+                    <md-divider></md-divider>
+                </md-list-item>
+                <!-- <md-list-item>
+                    <md-button ng-click="vm.logout()" aria-label="Logout">
+                        <md-icon style="width: 30px; padding-bottom: 5px;" md-svg-icon="sign-out">
+                        </md-icon>
+                        Logout
+                    </md-button>
+                    <md-divider></md-divider>
+                </md-list-item> -->
+            </md-list>
+            <md-divider></md-divider>
+        </md-content>
+    </div>
+
 </md-sidenav>

@@ -8,13 +8,18 @@
     /* @ngInject */
     function SidebarController($state, $mdSidenav, routerHelper) {
         var vm = this;
-        var states = routerHelper.getStates();
+
         vm.isCurrent = isCurrent;
         vm.menuItemClicked = menuItemClicked;
+        
+        var states = routerHelper.getStates();
 
         activate();
 
-        function activate() { getNavRoutes(); }
+        function activate() {
+            getNavRoutes();
+        }
+
 
         function menuItemClicked(route) {
             if (!$mdSidenav('left').isLockedOpen()) {

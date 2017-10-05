@@ -1,0 +1,61 @@
+<md-subheader ng-show="showFilter" id="filter-subheader">
+    <div layout="row" layout-xs="column">
+        <md-autocomplete
+            md-search-text-change="stateChangeCallback()"
+            md-search-text="searchText"
+            md-items="item in []"
+            md-item-text="item.title"
+            md-min-length="3"
+            placeholder="Search"
+            class="filter-container"
+            flex flex-order-xs="2">
+            <md-item-template>
+                <span md-highlight-text="searchText" md-highlight-flags="^i">{{item.title}}</span>
+            </md-item-template>
+        </md-autocomplete>
+        <span flex="5" ng-show="showFilterPickList"></span>
+        <md-input-container ng-show="showFilterPickList"  flex flex-order-xs="1"
+                            flex-gt-xs="40" class="status-filter">
+            <label>{{optionTitle}}</label>
+            <md-select name="option-filter" ng-model="selectedOption" placeholder="Option" ng-change="stateChangeCallback()">
+                <md-option ng-value="option.id" ng-repeat="option in optionValues">
+                    {{option.title}}
+                </md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+</md-subheader>
+<md-content id="att-list" class="md-content" flex>
+    <md-list flex>
+        <md-divider></md-divider>
+        <md-list-item ng-repeat="item in listItems| attTitleValueFilter:searchText | attOptionFilter: selectedOption: applyOptionFilter"
+                      ng-class="{'secondary-button-padding': displayRightIcon || !!item.rightTextData}"
+                      ng-click="listItemCallback(item)">
+            <div class="row-info"
+                 ng-class="{'with-button' : displayRightIcon || !!item.rightTextData}">
+                <div class="name-title trunc-text name-title-bar">
+                    {{item.title}}
+                </div>
+                <div ng-repeat="subItem in item.dataForDisplay"
+                     class="trunc-text">
+                    <span class="subtitle-label">{{subItem.label}}:</span>
+                    <span class="subtitle-value" style="color:{{subItem.color ? subItem.color : ''}}">{{subItem.value}}</span>
+                </div>
+            </div>
+            <span flex></span>
+            <md-button  ng-class="{'md-secondary': displayRightIcon}" class="att-button" ng-if="rightIcon"
+                        ng-click="rightIconCallback($event, item)"
+                        aria-label="{{rightIconLabel}}">
+                <md-icon md-colors="{fill: 'accent'}" ng-class="{'svg-up': rightIconLabel}"
+                         class="sv32" md-svg-icon="{{rightIconImage}}">
+                </md-icon>
+                <div class="icon-label hide-xs" aria-label="{{rightIconLabel}}" ng-if="rightIconLabel.length > 0">{{rightIconLabel}}</div>
+                <div class="icon-label hide-gt-xs" aria-label="{{rightIconLabel}}" ng-if="shortStrLabel.length > 0">{{shortStrLabel}}</div>
+            </md-button>
+            <span ng-if="!!item.rightTextData">{{item.rightTextData}}</span>
+            <span ng-if="withCarot" class="carrot" id="carrot">
+                <md-icon md-svg-icon="chevron-left" class="att-svg att-svg-up sv16 flip-image-h"></md-icon></span>
+            <md-divider></md-divider>
+        </md-list-item>
+    </md-list>
+</md-content>
