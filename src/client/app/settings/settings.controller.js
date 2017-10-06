@@ -1,7 +1,7 @@
 /* jshint -W106, -W074 */
 /* jscs:disable requireCamelCaseOrUpperCaseIdentifiers */
 /*jshint multistr: true */
-(function() {
+(function () {
     'use strict';
 
     var controllerId = 'SettingsController';
@@ -16,13 +16,38 @@
 
         var getLogFn = logger.getLogFn;
         var log = getLogFn(controllerId);
+        var logError = getLogFn(controllerId, 'error');
+        var logSuccess = getLogFn(controllerId, 'success');
+        var logWarning = getLogFn(controllerId, 'warning');
         vm.clearCache = clearCache;
         vm.showThemeDialog = showThemeDialog;
+        vm.getPollingInterval = getPollingInterval,
+        vm.setPollingInterval = setPollingInterval
 
         activate();
 
         function activate() {
+            getPollingInterval();
             log('Activated Settings Controller');
+        }
+
+        function getPollingInterval() {
+            dataservice.getPollingInterval()
+                .then(function (response) {
+                    vm.pollingInterval = response;
+                    log('vm.pollingInterval', vm.pollingInterval);
+                }, function() {
+                    vm.pollingInterval = 10;
+                });
+        }
+
+        function setPollingInterval() {
+            dataservice.setPollingInterval(vm.pollingInterval)
+                .then(function (response) {
+                    logSuccess('Polling Interval was updated', null, true);
+                }, function(error) {
+                    logError('Polling Interval update failed', error, true);
+                });
         }
 
         // set theme color
@@ -46,7 +71,7 @@
             var okText = 'Clear Cache';
             var cancelText = 'Cancel';
             confirmDialog.confirmationDialog(title, message, okText, cancelText)
-                .then(function() {
+                .then(function () {
                     dataservice.removeAllItemsFromCache();
                 });
         }

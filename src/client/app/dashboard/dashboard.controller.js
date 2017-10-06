@@ -6,7 +6,7 @@
         .controller(controllerId, DashboardController);
 
     /* @ngInject */
-    function DashboardController($q, $mdDialog, $interval, confirmDialog, dataservice, moment, logger, ATT_DATE_FORMAT) {
+    function DashboardController($q, $mdDialog, $timeout, confirmDialog, dataservice, moment, logger, ATT_DATE_FORMAT) {
         var vm = this;
         var getLogFn = logger.getLogFn;
         var log = getLogFn(controllerId);
@@ -17,15 +17,30 @@
         vm.selectCustomer = selectCustomer;
         vm.clearCustomer = clearCustomer;
         vm.contactCustomer = contactCustomer;
+        var pollingInterval = 10000;
 
         activate();
 
         function activate() {
             var promises = [getCustomersInQueue()];
             return $q.all(promises).then(function () {
-                // $interval(function () { getCustomersInQueue(); }, 30 * 1000);
                 log('Activated Dashboard View');
             });
+        }
+
+        function getPollingInterval() {
+            dataservice.getPollingInterval()
+                .then(function (response) {
+                    if (!response || response < 1) {
+                        pollingInterval = 10 * 1000;
+                    } else {
+                        pollingInterval = response * 1000;
+                    }
+                    logWarning('polling interval: ', pollingInterval);
+                    getCustomersInQueue();
+                }, function() {
+                    pollingInterval = 10 * 1000;
+                });
         }
 
         function clearCustomer(ev, customer) {
@@ -104,9 +119,10 @@
                     remainingTime += 10;
                     customer.order = queueOrder++;
                     customer.waitTime = remainingTime + ' min';
-                    customer.proposedTime = moment(customer.proposed_time).format(ATT_DATE_FORMAT.dateTime); //ATT_DATE_FORMAT.amPmTime
+                    customer.proposedTime = moment(customer.proposed_time).format(ATT_DATE_FORMAT.amPmTime);
                 });
                 vm.customers = customers;
+                $timeout(function () { getPollingInterval(); }, pollingInterval);
                 return customers;
             });
         }

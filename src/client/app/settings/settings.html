@@ -1,14 +1,26 @@
-<md-content layout="column" flex class="att-settings">
-    <md-content flex layout-margin layout="column">
-        <md-list ng-cloak>
-            <md-subheader class="md-no-sticky">
-                Application Settings
-            </md-subheader>
-            <md-list-item class="secondary-button-padding"
-                    ng-click="vm.changeStore()">
-                <md-icon md-font-icon="fa-hdd-o" class="fa s24"></md-icon>
-                <p>Change Store</p>
-            </md-list-item>
-        </md-list>
+<md-content layout="column" flex>
+    <md-content flex layout-margin layout="row">
+        <div flex-xs flex-gt-xs="50" layout="column">
+
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">Change Polling Interval</span>
+                    </md-card-title-text>
+                </md-card-title>
+                <md-card-content>
+                        <div>
+                                <md-input-container class="md-block" flex-gt-sm>
+                                    <label>Polling Interval (In Seconds)</label>
+                                    <input ng-model="vm.pollingInterval">
+                                </md-input-container>
+                            </div>
+                </md-card-content>
+                <md-card-actions layout="row" layout-align="end center">
+                    <md-button ng-click="vm.setPollingInterval()">Update</md-button>
+                </md-card-actions>
+            </md-card>
+        </div>
+
     </md-content>
 </md-content>

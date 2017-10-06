@@ -6,12 +6,14 @@
         .factory('dataservice', dataservice);
 
     /* @ngInject */
-    function dataservice($http, $q, CacheFactory, exception, logger) {
+    function dataservice($rootScope, $http, $q, CacheFactory, exception, logger) {
         var service = {
             clearCustomerFromQueue: clearCustomerFromQueue,
             getCustomersInQueue: getCustomersInQueue,
             removeAllItemsFromCache: removeAllItemsFromCache,
-            sendText: sendText
+            sendText: sendText,
+            setPollingInterval: setPollingInterval,
+            getPollingInterval: getPollingInterval
         };
 
         var staticCache;
@@ -30,13 +32,30 @@
             .catch(fail);
         }
 
-        function getPollingTime() {
-            return $http.get('/api/ref/queuePollingInterval')
+        function getPollingInterval() {
+            return $http.get('/api/ref/59d6437724fceaf01be7839d')
+            .then(function(response) {
+                if (response.data) {
+                    return response.data.value || 10;
+                } else {
+                    return 10;
+                }
+            })
+            .catch(fail);
+        }
+
+        function setPollingInterval(value) {
+            var data = {
+                key: 'queuePollingInterval',
+                value: value
+            };
+            return $http.put('/api/ref/59d6437724fceaf01be7839d', data)
             .then(success)
             .catch(fail);
         }
 
         function getCustomersInQueue() {
+            $rootScope['attHideSpinner'] = true;
             return $http.get('/api/queue')
                 .then(success)
                 .catch(fail);
