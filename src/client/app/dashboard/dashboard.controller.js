@@ -22,8 +22,8 @@
 
         function activate() {
             var promises = [getCustomersInQueue()];
-            $interval(function() {getCustomersInQueue()}, 10000);
             return $q.all(promises).then(function () {
+                // $interval(function () { getCustomersInQueue(); }, 30 * 1000);
                 log('Activated Dashboard View');
             });
         }
@@ -34,12 +34,12 @@
             confirmDialog.confirmationDialog(okButtonText, message, okButtonText, 'Cancel')
                 .then(function () {
                     dataservice.clearCustomerFromQueue(customer._id).then(
-                        function() {
+                        function () {
                             getCustomersInQueue();
-                        }, 
-                        function(error) {
+                        },
+                        function (error) {
                             logError('There was a problem when we tried to clear the customer from the queue', error, true);
-                        } 
+                        }
                     );
                 });
         }
@@ -78,12 +78,12 @@
 
             $scope.clearCustomer = function () {
                 dataservice.clearCustomerFromQueue(customer._id).then(
-                    function() {
+                    function () {
                         getCustomersInQueue();
-                    }, 
-                    function(error) {
+                    },
+                    function (error) {
                         logError('There was a problem when we tried to clear the customer from the queue', error, true);
-                    } 
+                    }
                 );
             };
 

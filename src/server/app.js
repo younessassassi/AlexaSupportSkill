@@ -5,14 +5,10 @@ var express = require('express'),
     four0four = require('./utils/404')();
 
 var environment = process.env.NODE_ENV;
-var client = process.env.client ;
+var client = process.env.client;
 var root = process.env.root;
 var temp = process.env.temp;
 var index = process.env.index;
-
-// var AWS = require('aws-sdk');
-// AWS.config.update({region: 'us-easy-1'});
-// var dynamodb = new AWS.DynamoDB();
 
 var db = mongoose.connect('mongodb://younessassassi:echofabulous1@ds157624.mlab.com:57624/heroku_tljqf0tk');
 var app = express();
@@ -25,26 +21,31 @@ app.use(logger('dev'));
 var Book = require('./models/bookModel');
 var Skill = require('./models/skillModel');
 var Customer = require('./models/customerModel');
+var ReferenceData = require('./models/referenceDataModel');
 
 var port = process.env.PORT || 5000;
 
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 var bookRouter = require('./routes/bookRoutes')(Book);
 var skillRouter = require('./routes/skillRoutes')(Skill);
 var queueRouter = require('./routes/queueRoutes')(Customer);
+var referenceDataRouter = require('./routes/referenceDataRoutes')(ReferenceData);
+var bookingRouter = require('./routes/bookingRoutes')(Customer);
 var deploymentRoutes = require('./routes/deploymentRoutes');
 
 app.use('/api/books', bookRouter);
+app.use('/api/booking', bookingRouter);
 app.use('/api/skill', skillRouter);
 app.use('/api/queue', queueRouter);
 app.use('/api/routes', deploymentRoutes);
+app.use('/api/ref', referenceDataRouter);
 
 switch (environment) {
     case 'build':
         console.log('** BUILD **');
-        app.use(express.static('./build'));
+        app.use(express.static('./build/'));
         // Any invalid calls for templateUrls are under app/* and should return 404
         app.use('/app/*', function (req, res, next) {
             four0four.send404(req, res);

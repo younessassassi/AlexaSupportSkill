@@ -1,12 +1,24 @@
+/* jshint -W104 */
 var express = require('express'),
-    customerJson = require('../data/customerJson.js');
+    customerJson = require('../data/customerJson.js'),
+    moment = require('moment');
 
 var routes = function (Customer) {
     var customerRouter = express.Router();
+    // Dynamo db configuration
+    var AWS = require('aws-sdk');
+    var dynamoDBConfiguration = {
+        "accessKeyId": "AKIAIDIGQWS2RO5Q37DA",
+        "secretAccessKey": "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",
+        "region": "us-east-1"
+    };
+    AWS.config.update(dynamoDBConfiguration);
+    var tableName = 'user_queue';
+
     customerRouter.route('/admin')
         .get(function (req, res) {
             for (var cus of customerJson) {
-                cus.checkinTime = Date.now();
+                cus.checkinTime = moment().format('YYYY-MM-DDTHH:mm:ss');
             }
             Customer.insertMany(customerJson, function (err, data) {
                 if (err) {
@@ -20,7 +32,7 @@ var routes = function (Customer) {
     customerRouter.route('/')
         .post(function (req, res) {
             var customer = new Customer(req.body);
-            customer.checkinTime = Date.now();
+            customer.checkinTime = moment().format('YYYY-MM-DDTHH:mm:ss');
 
             customer.save(function (err, customer) {
                 if (err) {
@@ -31,12 +43,31 @@ var routes = function (Customer) {
             });
         })
         .get(function (req, res) {
-            var query = {};
-            Customer.find(query, function (err, customers) {
+            console.log("Scanning " + tableName + " table.");
+            Customer.remove({}, function(err) {
                 if (err) {
-                    res.status(500).send(err);
+                    console.log('error deleting records', err);
                 } else {
-                    res.json(customers);
+                    var documentClient = new AWS.DynamoDB.DocumentClient();
+                    var params = {
+                        TableName: tableName,
+                        FilterExpression: 'handled = :handled',
+                        ExpressionAttributeValues: { ':handled': 0 }
+                    };
+                    documentClient.scan(params, (err, data) => {
+                        if (err) {
+                            console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+                        } else {
+                            console.log(data.Items);
+                            Customer.insertMany(data.Items, function (err, data) {
+                                if (err) {
+                                    res.status(500).send(err);
+                                } else {
+                                    res.json(data);
+                                }
+                            });
+                        }
+                    });   
                 }
             });
         });
@@ -58,28 +89,75 @@ var routes = function (Customer) {
             res.json(req.customer);
         })
         .put(function (req, res) {
-            req.customer.name = req.body.name;
-            req.customer.phone = req.body.phone;
-            req.customer.account = req.body.account;
-            req.customer.visitReason = req.body.visitReason;
-            req.customer.clearedTime = Date.now();
-            req.customer.save(function (err) {
+            var cust = JSON.parse(JSON.stringify(req.customer));
+            delete cust._id;
+            delete cust.__v;
+            cust.handled = 1;
+            
+            var documentClient = new AWS.DynamoDB.DocumentClient();
+            console.log("Updating the item...", cust);
+            documentClient.put({
+                'TableName': tableName,
+                'Item': cust, function(err, data) {
                 if (err) {
-                    res.status(500).send(err);
+                    console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
                 } else {
-                    res.json(req.customer);
+                    console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
                 }
-            });
+            }
+        });
+            
+            
+            // console.log(req.customer);
+            // documentClient.put({
+            //          'TableName': tableName,
+            //          'Item': req.customer
+            //         },(err, data) => {              //needing stringify on this for avoiding silent errors is ridiculous
+            //             if (err) { console.log("Error: " + err); }
+
+            //             else { 
+            //                 console.log("Success: " + data);
+            //                 req.customer.save(function (err) {
+            //                     if (err) {
+            //                         res.status(500).send(err);
+            //                     } else {
+            //                         res.json(req.customer);
+            //                     }
+            //                 });
+            //             }
+            //         });
+        
+            
         })
         .patch(function (req, res) {
-            req.customer.clearedTime = Date.now();
-            req.customer.save(function (err) {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    res.json(req.customer);
-                }
-            });
+            var cust = JSON.parse(JSON.stringify(req.customer));
+            
+            delete cust._id;
+            delete cust.__v;
+            cust.phone_number = parseInt(cust.phone_number);
+            req.customer = cust.handled = 1;
+            req.customer = cust.clearedTime = moment().format('YYYY-MM-DDTHH:mm:ss');
+            var documentClient = new AWS.DynamoDB.DocumentClient();
+            console.log(cust);
+            documentClient.put({
+                     'TableName': tableName,
+                     'Item': cust
+                    },(err, data) => {              //needing stringify on this for avoiding silent errors is ridiculous
+                        if (err) { 
+                            console.log("Error: " + err); 
+                        }
+                        else { 
+                            console.log("Success: " + data);
+                            req.customer = JSON.parse(JSON.stringify(cust));
+                            req.customer.save(function (err) {
+                                if (err) {
+                                    res.status(500).send(err);
+                                } else {
+                                    res.json(cust);
+                                }
+                            });
+                        }
+                    });
         })
         .delete(function (req, res) {
             req.customer.remove(function (err) {

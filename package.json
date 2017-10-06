@@ -17,18 +17,23 @@
     "test": "gulp test"
   },
   "dependencies": {
+    "alexa-verifier": "^0.5.0",
+    "aws-sdk": "^2.127.0",
     "body-parser": "^1.8.2",
     "express": "^4.9.3",
+    "gulp": "^3.9.1",
     "imagemin": "^4.0.0",
     "imagemin-gifsicle": "^4.2.0",
     "imagemin-jpegtran": "^4.3.2",
     "imagemin-optipng": "^4.3.0",
     "imagemin-pngquant": "^4.2.0",
-    "morgan": "^1.1.1",
-    "serve-favicon": "^2.0.1",
-    "gulp": "^3.9.1",
+    "moment": "^2.18.1",
     "mongoose": "^4.11.13",
-    "alexa-verifier": "^0.5.0"
+    "morgan": "^1.1.1",
+    "random-number": "0.0.9",
+    "serve-favicon": "^2.0.1",
+    "sort-json-array": "^0.1.7",
+    "yargs": "^3.15.0"
   },
   "devDependencies": {
     "angular-cookies": "^1.6.4",
@@ -105,11 +110,9 @@
     "sinon": "^1.12.2",
     "sinon-chai": "^2.6.0",
     "uglify-save-license": "^0.4.1",
-    "wiredep": "^2.2.2",
-    "yargs": "^3.15.0"
+    "wiredep": "^2.2.2"
   },
   "browserslist": [
     "last 4 versions"
   ]
 }
-
