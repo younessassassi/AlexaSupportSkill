@@ -1,49 +1,49 @@
 var router = require('express').Router();
 var four0four = require('../utils/404')();
 var data = require('../data/appJson');
-
-router.get('/surveyreport', getSurveyReport);
-router.get('/surveys', getSurveys);
-router.get('/survey', getSurvey);
-router.get('/newsurvey', insertSurvey);
+router.get('/text/:phone', sendMail);
 router.get('/people', getPeople);
 router.get('/person/:id', getPerson);
-router.get('/definition', getFormDefinition);
-router.get('/schema', getFormSchema);
 router.get('/*', four0four.notFoundMiddleware);
 
 module.exports = router;
 
 //////////////
 
-function getSurveyReport(req, res, next) {
-    res.status(200).send(data.surveyreport);
-}
+var nodemailer = require('nodemailer');
 
-function getSurveys(req, res, next) {
-    res.status(200).send(data.surveys);
-}
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: 'echofabulous@gmail.com',
+        pass: 'echofab11'
+    }
+});
 
-function getSurvey(req, res, next) {
-    res.status(200).send(data.survey);
-}
+function sendMail(req, res) {
+    var phoneNumber = +req.params.phone;
+    var mailOptions = {
+        from: 'echofabulous@gmail.com',
+        to: phoneNumber + '@txt.att.net',
+        subject: 'ATT Store visit',
+        text: 'This ATT store automated text. We are ready for you, please come to the front desk!'
+    };
 
-function insertSurvey(req, res, next) {
-    res.status(200).send({
-        'surveyId': '1'
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.log(error);
+            res.status(500).send(error);
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.json(info);
+        }
     });
 }
 
+
+
 function getPeople(req, res, next) {
     res.status(200).send(data.people);
-}
-
-function getFormDefinition(req, res, next) {
-    res.status(200).send(data.definition);
-}
-
-function getFormSchema(req, res, next) {
-    res.status(200).send(data.schema);
 }
 
 function getPerson(req, res, next) {

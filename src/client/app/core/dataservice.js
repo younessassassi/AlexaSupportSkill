@@ -10,7 +10,8 @@
         var service = {
             clearCustomerFromQueue: clearCustomerFromQueue,
             getCustomersInQueue: getCustomersInQueue,
-            removeAllItemsFromCache: removeAllItemsFromCache
+            removeAllItemsFromCache: removeAllItemsFromCache,
+            sendText: sendText
         };
 
         var staticCache;
@@ -22,6 +23,12 @@
         staticCache = CacheFactory.get('staticCache');
 
         return service;
+
+        function sendText(number) {
+            return $http.get('/api/routes/text/' + number)
+            .then(success)
+            .catch(fail);
+        }
 
         function getCustomersInQueue() {
             return $http.get('/api/queue')
@@ -60,6 +67,14 @@
 
         function removeAllItemsFromCache() {
             staticCache.removeAll();
+        }
+
+        function success(response) {
+            return 'Success';
+        }
+
+        function fail(e) {
+            return exception.catcher('XHR Failed for clear customer')(e);
         }
     }
 })();

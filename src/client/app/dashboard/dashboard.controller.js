@@ -6,7 +6,7 @@
         .controller(controllerId, DashboardController);
 
     /* @ngInject */
-    function DashboardController($q, $mdDialog, $interval, confirmDialog, dataservice, logger) {
+    function DashboardController($q, $mdDialog, $interval, confirmDialog, dataservice, moment, logger, ATT_DATE_FORMAT) {
         var vm = this;
         var getLogFn = logger.getLogFn;
         var log = getLogFn(controllerId);
@@ -50,12 +50,7 @@
             var okButtonText = 'Text';
             confirmDialog.confirmationDialog(title, message, okButtonText, 'Cancel')
                 .then(function () {
-                    // adminDataService.upsertTeam(vm.teamModel, _isExistingTeam)
-                    //     .then(function () {
-                    //         goToListView();
-                    //     }, function(error) {
-                    //         logError('There was a problem when we tried to insert the team information', error, true);
-                    //     });
+                    dataservice.sendText(customer.phone_number);
                 });
         }
 
@@ -100,6 +95,7 @@
                     remainingTime += 10;
                     customer.order = queueOrder++;
                     customer.waitTime = remainingTime + ' min';
+                    customer.proposedTime = moment(customer.proposed_time).format(ATT_DATE_FORMAT.amPmTime);
                 });
                 vm.customers = customers;
                 return customers;

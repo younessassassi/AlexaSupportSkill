@@ -89,23 +89,33 @@ var routes = function (Customer) {
             res.json(req.customer);
         })
         .put(function (req, res) {
-            var cust = JSON.parse(JSON.stringify(req.customer));
-            delete cust._id;
-            delete cust.__v;
-            cust.handled = 1;
+            var payload = {
+                "proposed_time": req.customer.proposed_time,
+                "problem": req.customer.problem,
+                "num_lines": req.customer.num_lines,
+                "services": req.customer.services,
+                "handled": 1,
+                "phone_number": req.customer.phone_number,
+                "checkin_timestamp": req.customer.checkin_timestamp,
+                "account_number": req.customer.account_number,
+                "name": req.customer.name
+            };
             
             var documentClient = new AWS.DynamoDB.DocumentClient();
-            console.log("Updating the item...", cust);
+            console.log("Updating the item...", payload);
             documentClient.put({
                 'TableName': tableName,
-                'Item': cust, function(err, data) {
+                'Item': payload
+            }, function(err, data) {
                 if (err) {
                     console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+                    res.status(500).send(err);
                 } else {
-                    console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
+                    console.log("UpdateItem succeeded:", data);
+                    res.json(payload);
                 }
-            }
-        });
+            });
+        })
             
             
             // console.log(req.customer);
@@ -126,9 +136,6 @@ var routes = function (Customer) {
             //                 });
             //             }
             //         });
-        
-            
-        })
         .patch(function (req, res) {
             var cust = JSON.parse(JSON.stringify(req.customer));
             
@@ -145,6 +152,7 @@ var routes = function (Customer) {
                     },(err, data) => {              //needing stringify on this for avoiding silent errors is ridiculous
                         if (err) { 
                             console.log("Error: " + err); 
+                            res.status(500).send(err);
                         }
                         else { 
                             console.log("Success: " + data);
