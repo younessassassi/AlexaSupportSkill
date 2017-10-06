@@ -32,11 +32,9 @@ var bookRouter = require('./routes/bookRoutes')(Book);
 var skillRouter = require('./routes/skillRoutes')(Skill);
 var queueRouter = require('./routes/queueRoutes')(Customer);
 var referenceDataRouter = require('./routes/referenceDataRoutes')(ReferenceData);
-var bookingRouter = require('./routes/bookingRoutes')(Customer);
 var deploymentRoutes = require('./routes/deploymentRoutes');
 
 app.use('/api/books', bookRouter);
-app.use('/api/booking', bookingRouter);
 app.use('/api/skill', skillRouter);
 app.use('/api/queue', queueRouter);
 app.use('/api/routes', deploymentRoutes);

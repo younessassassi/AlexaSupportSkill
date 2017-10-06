@@ -21,8 +21,8 @@
         var logWarning = getLogFn(controllerId, 'warning');
         vm.clearCache = clearCache;
         vm.showThemeDialog = showThemeDialog;
-        vm.getPollingInterval = getPollingInterval,
-        vm.setPollingInterval = setPollingInterval
+        vm.getPollingInterval = getPollingInterval;
+        vm.setPollingInterval = setPollingInterval;
 
         activate();
 

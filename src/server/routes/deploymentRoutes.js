@@ -25,8 +25,8 @@ function sendMail(req, res) {
     var mailOptions = {
         from: 'echofabulous@gmail.com',
         to: phoneNumber + '@txt.att.net',
-        subject: 'ATT Store visit',
-        text: 'This ATT store automated text. We are ready for you, please come to the front desk!'
+        subject: 'AT&T Store visit',
+        text: 'This is an AT&T store automated text. We are ready for you. Please come to the front desk for assisstance.'
     };
 
     transporter.sendMail(mailOptions, function (error, info) {
@@ -39,8 +39,6 @@ function sendMail(req, res) {
         }
     });
 }
-
-
 
 function getPeople(req, res, next) {
     res.status(200).send(data.people);

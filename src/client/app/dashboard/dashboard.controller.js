@@ -48,7 +48,7 @@
             var okButtonText = 'Confirm';
             confirmDialog.confirmationDialog(okButtonText, message, okButtonText, 'Cancel')
                 .then(function () {
-                    dataservice.clearCustomerFromQueue(customer._id).then(
+                    dataservice.clearCustomerFromQueue(customer).then(
                         function () {
                             getCustomersInQueue();
                         },
@@ -96,7 +96,7 @@
             };
 
             $scope.clearCustomer = function () {
-                dataservice.clearCustomerFromQueue(customer._id).then(
+                dataservice.clearCustomerFromQueue(customer).then(
                     function () {
                         getCustomersInQueue();
                     },

@@ -28,20 +28,20 @@
 
         function sendText(number) {
             return $http.get('/api/routes/text/' + number)
-            .then(success)
-            .catch(fail);
+                .then(success)
+                .catch(fail);
         }
 
         function getPollingInterval() {
             return $http.get('/api/ref/59d6437724fceaf01be7839d')
-            .then(function(response) {
-                if (response.data) {
-                    return response.data.value || 10;
-                } else {
-                    return 10;
-                }
-            })
-            .catch(fail);
+                .then(function (response) {
+                    if (response.data) {
+                        return response.data.value || 10;
+                    } else {
+                        return 10;
+                    }
+                })
+                .catch(fail);
         }
 
         function setPollingInterval(value) {
@@ -50,12 +50,12 @@
                 value: value
             };
             return $http.put('/api/ref/59d6437724fceaf01be7839d', data)
-            .then(success)
-            .catch(fail);
+                .then(success)
+                .catch(fail);
         }
 
         function getCustomersInQueue() {
-            $rootScope['attHideSpinner'] = true;
+            $rootScope.attHideSpinner = true;
             return $http.get('/api/queue')
                 .then(success)
                 .catch(fail);
@@ -63,7 +63,7 @@
             function success(response) {
                 var data = _.sortBy(response.data, function (obj) { return new Date(obj.proposed_time); });
 
-                console.log('data', data);
+                // console.log('data', data);
                 return data;
             }
 
@@ -72,9 +72,12 @@
             }
         }
 
-        function clearCustomerFromQueue(customerId) {
-            var params = {};
-            return $http.put('/api/queue/' + customerId, params)
+        function clearCustomerFromQueue(customer) {
+            var params = {
+                phone_number: customer.phone_number,
+                account_number: customer.account_number
+            };
+            return $http.put('/api/queue/' + customer._id, params)
                 .then(success)
                 .catch(fail);
         }
