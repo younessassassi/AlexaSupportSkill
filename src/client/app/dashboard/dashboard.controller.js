@@ -70,6 +70,15 @@
             $scope.hide = function () {
                 $mdDialog.hide();
             };
+            $scope.sendText = function() {
+                var message = 'Click on Text to contact this customer?';
+                var title = 'Contact Via Text';
+                var okButtonText = 'Text';
+                confirmDialog.confirmationDialog(title, message, okButtonText, 'Cancel')
+                    .then(function () {
+                        dataservice.sendText(customer.phone_number);
+                    });
+            };
 
             $scope.clearCustomer = function () {
                 dataservice.clearCustomerFromQueue(customer._id).then(
@@ -95,7 +104,7 @@
                     remainingTime += 10;
                     customer.order = queueOrder++;
                     customer.waitTime = remainingTime + ' min';
-                    customer.proposedTime = moment(customer.proposed_time).format(ATT_DATE_FORMAT.amPmTime);
+                    customer.proposedTime = moment(customer.proposed_time).format(ATT_DATE_FORMAT.dateTime); //ATT_DATE_FORMAT.amPmTime
                 });
                 vm.customers = customers;
                 return customers;

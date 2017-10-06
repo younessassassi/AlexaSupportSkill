@@ -13,17 +13,20 @@
         <md-dialog-content>
             <div class="md-dialog-content">
                 <md-list id="row-list">
-                    <md-list-item flex><span flex="35" class="row-heading">Phone Number</span><span class="row-data">{{customer.phone_number}}</span></md-list-item>
+                    <md-list-item flex><span flex="35" class="row-heading">Phone Number</span><span class="row-data">{{customer.phone_number | attTelFilter}}</span></md-list-item>
                     <md-list-item flex><span flex="35" class="row-heading">BAN</span><span class="row-data">{{customer.account_number}}</span></md-list-item>
                     <md-list-item flex><span flex="35" class="row-heading">Reason for visit</span><span class="row-data">{{customer.problem}}</span></md-list-item>
                     <md-list-item flex><span flex="35" class="row-heading">Number Of lines</span><span class="row-data">{{customer.num_lines}}</span></md-list-item>
-                    <md-list-item flex><span flex="35" class="row-heading">Services</span><span class="row-data"><span ng-repeat="service in customer.services">{{service}} ,</span></span></md-list-item>
+                    <md-list-item flex><span flex="35" class="row-heading">Services</span><span class="row-data"><span ng-repeat="service in customer.services">{{service}}{{$last ? '' : ', '}}</span></span></md-list-item>
                 </md-list>
             </div>
         </md-dialog-content>
 
         <md-dialog-actions layout="row">
             <span flex></span>
+            <md-button ng-click="sendText()">
+                Send Text
+            </md-button>
             <md-button ng-click="clearCustomer()">
                 Clear From Queue
             </md-button>

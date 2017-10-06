@@ -30,16 +30,19 @@
             .catch(fail);
         }
 
+        function getPollingTime() {
+            return $http.get('/api/ref/queuePollingInterval')
+            .then(success)
+            .catch(fail);
+        }
+
         function getCustomersInQueue() {
             return $http.get('/api/queue')
                 .then(success)
                 .catch(fail);
 
             function success(response) {
-                var data = _.filter(response.data, function (obj) {
-                    return !angular.isDefined(obj.clearedTime);
-                });
-                data = _.sortBy(data, function (value) { return new Date(value); });
+                var data = _.sortBy(response.data, function (obj) { return new Date(obj.proposed_time); });
 
                 console.log('data', data);
                 return data;
@@ -55,14 +58,6 @@
             return $http.put('/api/queue/' + customerId, params)
                 .then(success)
                 .catch(fail);
-
-            function success(response) {
-                return 'Success';
-            }
-
-            function fail(e) {
-                return exception.catcher('XHR Failed for clear customer')(e);
-            }
         }
 
         function removeAllItemsFromCache() {

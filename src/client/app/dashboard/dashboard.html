@@ -2,19 +2,22 @@
     <md-content class="dashboard-content">
         <md-list>
             <span layout="row" flex>
+                <span>
+
+                </span>
                 <span flex="10"></span>
-                <span flex="30" class="name-title">Name</span>
-                <span flex="30" class="name-title">Proposed Time</span>
-                <span flex="30"></span>
+                <span flex-xs="20" flex="25" class="name-title">Name</span>
+                <span flex-xs="20" flex="25" class="name-title">Proposed Time</span>
+                <span flex></span>
             </span>
             <md-divider></md-divider>
-            <md-list-item ng-repeat="person in vm.customers" class="secondary-button-padding" ng-click="vm.selectCustomer($event, person)">
-                    <span flex="10">{{person.order}}</span>
-                    <span flex="30">{{person.name}}</span>
-                    <span flex="30"><center>{{person.proposedTime}}</center></span>
-                    <span flex="30" layout-align="right"></span>    
-                    <md-icon md-svg-icon="check" class="md-secondary" ng-click="vm.clearCustomer($event, person)"></md-icon>
-                    <md-icon md-svg-icon="desk-phone"  ng-click="vm.contactCustomer($event, person)" aria-label="Call or text" class="md-secondary"></md-icon>
+            <md-list-item flex ng-repeat="person in vm.customers" class="secondary-button-padding" ng-click="vm.selectCustomer($event, person)">
+                    <span flex="10" class="list-data">{{person.order}}</span>
+                    <span flex="30" class="list-data">{{person.name}}</span>
+                    <span flex="30" class="list-data">{{person.proposedTime}}</span>
+                    <span flex="30" layout-align="right"><md-icon md-svg-icon="check" class="md-secondary" ng-click="vm.clearCustomer($event, person)"></md-icon>
+                        <md-icon md-svg-icon="desk-phone"  ng-click="vm.contactCustomer($event, person)" aria-label="Call or text" class="md-secondary"></md-icon></span>    
+                    
                 <md-divider></md-divider>
             </md-list-item>    
         </md-list>
